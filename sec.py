@@ -61,7 +61,9 @@ def busca_producto(codigo):
 
     # finally:
     #     driver.quit()
-def obtener_sellos:
+
+
+def obtener_sellos():
     for cliente in range(1,9999999999999+1):
         busca_producto(cliente)
 
