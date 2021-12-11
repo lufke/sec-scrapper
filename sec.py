@@ -21,7 +21,7 @@ options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 driver = webdriver.Chrome(os.environ.get("CHROMEDRIVER_PATH"), options=options)
 
 
-cliente = pymongo.MongoClient(os.environ.get(URL_MONGO))
+cliente = pymongo.MongoClient(os.environ.get("URL_MONGO"))
 db = cliente['sec']
 tabla = db['sello_sec']
 
@@ -68,5 +68,5 @@ def obtener_sellos():
         busca_producto(cliente)
 
 sched = BlockingScheduler()
-sched.add_job(obtener_sellos, 'cron', day_of_week='sat', hour=(19+3), minute=20)
+sched.add_job(obtener_sellos, 'cron', day_of_week='sat', hour=(19+3), minute=30)
 sched.start()
