@@ -22,8 +22,7 @@ options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 driver = webdriver.Chrome(CHROMEDRIVER_PATH, options=options)
 
 
-cliente = pymongo.MongoClient(
-    'mongodb+srv://pipechela:lufke1980@chimba-diz4m.mongodb.net/')
+cliente = pymongo.MongoClient(os.environ.get(URL_MONGO))
 db = cliente['sec']
 tabla = db['sello_sec']
 
