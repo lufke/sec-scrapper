@@ -13,13 +13,12 @@ init()
 
 load_dotenv()
 
-CHROMEDRIVER_PATH = os.environ.get("CHROMEDRIVER_PATH")
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--no-sandbox")
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-driver = webdriver.Chrome(CHROMEDRIVER_PATH, options=options)
+driver = webdriver.Chrome(os.environ.get("CHROMEDRIVER_PATH"), options=options)
 
 
 cliente = pymongo.MongoClient(os.environ.get(URL_MONGO))
@@ -67,5 +66,5 @@ def obtener_sellos:
         busca_producto(cliente)
 
 sched = BlockingScheduler()
-sched.add_job(obtener_sellos, 'cron', day_of_week='sat', hour=(19-3))
+sched.add_job(obtener_sellos, 'cron', day_of_week='sat', hour=(19-3), minute=20)
 sched.start()
