@@ -6,7 +6,6 @@ import pymongo
 from dotenv import load_dotenv
 import os
 from colorama import init, Fore
-from apscheduler.schedulers.blocking import BlockingScheduler
 
 
 init()
@@ -70,7 +69,4 @@ def obtener_sellos():
     for cliente in range(int(os.environ.get('CODIGO_INICIAL')),9999999999999+1):
         busca_producto(cliente)
 
-sched = BlockingScheduler(timezone="Europe/London")
-sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=4, minute=25)
-# sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=4, minute=10)
-sched.initialize()
+obtener_sellos()
