@@ -72,6 +72,6 @@ def obtener_sellos():
 
 
 sched = BlockingScheduler(timezone="America/Santiago")
-sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=4, minute=50)
+sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=2)
 # sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=4, minute=10)
 sched.start()
