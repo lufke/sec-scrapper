@@ -54,6 +54,9 @@ def busca_producto(codigo):
         print(Fore.GREEN + f'Sello: {codigo:013d} guardado' + Fore.RESET)
 
     except NoSuchElementException:
+        datos = {'_id': codigo, 'codigo': f'{codigo:013d}', 'res_excenta': 'sin datos', 'fecha_resolucion': 'sin datos',
+                         'emisor': 'sin datos', 'producto': 'sin datos', 'marca': 'sin datos', 'modelo': 'sin datos', 'pais': pais}
+        tabla.insert_one(datos)
         print(Fore.RED + f'Sello: {codigo:013d} no existe' + Fore.RESET)
 
     except Exception as e:
@@ -64,9 +67,9 @@ def busca_producto(codigo):
 
 
 def obtener_sellos():
-    for cliente in range(1,9999999999999+1):
+    for cliente in range(int(os.environ.get('CODIGO_INICIAL')),9999999999999+1):
         busca_producto(cliente)
 
-sched = BlockingScheduler(timezone="America/Santiago")
-sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=3, minute=58)
+sched = BlockingScheduler(timezone="Europe/London")
+sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=1, minute=5)
 sched.start()
