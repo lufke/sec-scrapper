@@ -6,8 +6,6 @@ import pymongo
 from dotenv import load_dotenv
 import os
 from colorama import init, Fore
-import datetime
-import time
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 
