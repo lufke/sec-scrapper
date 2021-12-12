@@ -70,7 +70,8 @@ def obtener_sellos():
     for cliente in range(int(os.environ.get('CODIGO_INICIAL')),9999999999999+1):
         busca_producto(cliente)
 
+
 sched = BlockingScheduler(timezone="America/Santiago")
-sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=4, minute=43)
+sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=4, minute=50)
 # sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=4, minute=10)
 sched.start()
