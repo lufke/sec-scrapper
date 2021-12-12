@@ -1,7 +1,9 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Chrome, ChromeOptions
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 import pymongo
 from dotenv import load_dotenv
 import os
@@ -18,7 +20,8 @@ options.add_argument('--headless')
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--no-sandbox")
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-driver = webdriver.Chrome(os.environ.get("CHROMEDRIVER_PATH"), options=options)
+# driver = webdriver.Chrome(os.environ.get("CHROMEDRIVER_PATH"), options=options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 
 cliente = pymongo.MongoClient(os.environ.get("URL_MONGO"))
@@ -67,11 +70,11 @@ def busca_producto(codigo):
 
 
 def obtener_sellos():
+    # for cliente in range(int(os.environ.get('CODIGO_INICIAL')),int(os.environ.get('CODIGO_INICIAL'))+1000):
     for cliente in range(int(os.environ.get('CODIGO_INICIAL')),9999999999999+1):
         busca_producto(cliente)
 
 
 sched = BlockingScheduler(timezone="America/Santiago")
-sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=2)
-# sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=4, minute=10)
+sched.add_job(obtener_sellos, 'cron', day_of_week='sun', hour=2, minute=25)
 sched.start()
