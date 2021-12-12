@@ -68,5 +68,5 @@ def obtener_sellos():
         busca_producto(cliente)
 
 sched = BlockingScheduler(timezone="America/Santiago")
-sched.add_job(obtener_sellos, 'cron', day_of_week=5, hour=23, minute=15)
+sched.add_job(obtener_sellos, 'cron', day_of_week=5, hour=23, minute=20)
 sched.start()
